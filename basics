@@ -1,0 +1,41 @@
+#assumed:  Ubuntu 26.04 (with current updates) with docker and docker compose installed and running, best to have a fixed IP address to access the server from a browser.  Local user can execute sudo commands and you have SSH access to the server (or the VM console
+#also assumed:  Basic knowledge of Linux command line, shell script execution, and docker compose
+
+#create a directory called openwebui under your home directory and save this docker-compose.yml file in it
+#change the volume paths in the yml file to something sane on your Linux host
+#based off tips in the Docker Compose section at https://docs.openwebui.com/getting-started/quick-start/
+
+#docker-compose.yml
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    volumes:
+      - /home/craig/openwebui/volume:/app/backend/data
+    environment:
+      - WEBUI_SECRET_KEY=Generate your own using command "openssl rand -hex 32"
+    restart: unless-stopped
+
+#To start the application use the command
+sudo docker compose up -d
+
+#To access the new openwebui service from a browser: http://servers-ip-address:3000
+
+#To UPDATE openwebui I run the following bash script (could just run the commands individually)
+#craig@openwebui:~/openwebui$ cat update.sh
+#creates a backup of the database files, then updates the openwebui container, then starts the new version, then removes (prunes) the old container
+#run using command 'sudo ./update.sh'
+
+#!/bin/bash
+docker run --rm -v /home/craig/openwebui/volume:/data -v $(pwd):/backup   alpine tar czf /backup/openwebui-$(date +%Y%m%d).tar.gz /data
+docker compose pull
+docker compose up -d --remove-orphans
+docker image prune
+
+#once openwebui is running, connect it to the openrouter.ai API
+create account at openrouter.ai and add credits (start with $10)
+create API key at openrouter.ai and copy the key when you create it (you'll only be shown this key once)
+In the admin panel of openwebui, Add a connection to https://openrouter.ai/api/v1 and add your openrouter.ai key
+
+#good luck
