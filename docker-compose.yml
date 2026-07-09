@@ -1,0 +1,10 @@
+services:
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - "3000:8080"
+    volumes:
+      - /home/craig/openwebui/volume:/app/backend/data
+    environment:
+      - WEBUI_SECRET_KEY=61be46429ff1acef890-----------9fbe643a1294ff37e7cc9bbd50cd4
+    restart: unless-stopped
