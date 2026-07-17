@@ -49,4 +49,4 @@ https://docs.docker.com/engine/install/ubuntu/
 #PS - nginx docker-compose.yml also included.  Awsome reverse proxy for openwebui URL for easy access via normal ports and externally from your local network
 #nginx also allows for letsencrypt certificates to be auto created for your domain.   Allows for https://ai.wileyfamily.net rather than http://192.168.0.24:3000
 #DNS hints for nginx.  Create A record for nginx host.  create CNAME record for openwebui host that refers to the nginx A record.
-#gah - nginx is not in scope for this document - you're on your own, but well worth setting up
+#gah - nginx is not in scope for this document - you're on your own, but well worth setting up.  Turn websockets support ON for the openwebui host
