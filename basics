@@ -33,13 +33,16 @@ docker compose pull
 docker compose up -d --remove-orphans
 docker image prune
 
-#once openwebui is running, connect it to the openrouter.ai API
+once openwebui is running, connect it to the openrouter.ai API
 create account at openrouter.ai and add credits (start with $10)
 create API key at openrouter.ai and copy the key when you create it (you'll only be shown this key once)
 In the admin panel of openwebui, Add a connection to https://openrouter.ai/api/v1 and add your openrouter.ai key
 
+Make sure you try the "AUTO ROUTER" model!
+
 https://openrouter.ai/
 https://openwebui.com/
 https://docs.openwebui.com/
+https://docs.docker.com/engine/install/ubuntu/
 
 #good luck
